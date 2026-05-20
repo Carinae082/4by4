@@ -1060,6 +1060,14 @@ async def run_stage1(practice_pattern: Optional[int] = None):
 
 async def main():
     if sys.platform == "emscripten":
+        font = pygame.font.Font(None, 56)
+        screen.fill((20, 80, 140))
+        title = font.render("4x4 WEB STARTING", True, (255, 255, 255))
+        hint = pygame.font.Font(None, 32).render("If this appears, Python started.", True, (240, 240, 180))
+        screen.blit(title, title.get_rect(center=(SCREEN_W // 2, SCREEN_H // 2 - 28)))
+        screen.blit(hint, hint.get_rect(center=(SCREEN_W // 2, SCREEN_H // 2 + 24)))
+        pygame.display.flip()
+        await asyncio.sleep(1.0)
         await run_stage1(practice_pattern=None)
         return
 
