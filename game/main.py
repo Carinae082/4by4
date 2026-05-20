@@ -3,6 +3,7 @@ import pygame
 import sys
 import math
 import random
+import traceback
 from abc import ABC, abstractmethod
 from typing import Optional
 
@@ -1058,10 +1059,40 @@ async def run_stage1(practice_pattern: Optional[int] = None):
 
 
 async def main():
+    if sys.platform == "emscripten":
+        await run_stage1(practice_pattern=None)
+        return
+
     while True:
         choice = await run_menu()
         await run_stage1(practice_pattern=choice)
 
 
-asyncio.run(main())
+async def show_startup_error(exc: BaseException):
+    font = pygame.font.Font(None, 28)
+    lines = ["WEB STARTUP ERROR", *traceback.format_exception(exc)]
+    while True:
+        screen.fill((18, 0, 0))
+        y = 24
+        for raw in lines[:22]:
+            for line in raw.rstrip().splitlines() or [""]:
+                text = font.render(line[:110], True, (255, 210, 210))
+                screen.blit(text, (24, y))
+                y += 28
+                if y > SCREEN_H - 30:
+                    break
+            if y > SCREEN_H - 30:
+                break
+        pygame.display.flip()
+        await asyncio.sleep(0.1)
+
+
+async def safe_main():
+    try:
+        await main()
+    except BaseException as exc:
+        await show_startup_error(exc)
+
+
+asyncio.run(safe_main())
 
