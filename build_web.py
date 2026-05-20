@@ -15,19 +15,20 @@ def main() -> None:
             sys.executable,
             "-m",
             "pygbag",
-            "--ume_block=0",
             "--build",
             str(GAME_DIR),
         ],
         check=True,
     )
 
+    # pygbag 0.9.1 serves game.apk. The tar bundle is kept as a harmless
+    # compatibility artifact for templates that request it.
     bundle = WEB_DIR / "game.tar.gz"
     source = GAME_DIR / "main.py"
     with tarfile.open(bundle, "w:gz") as tar:
         tar.add(source, arcname="assets/main.py")
 
-    print(f"Created {bundle}")
+    print(f"Created compatibility bundle {bundle}")
 
 
 if __name__ == "__main__":
