@@ -888,9 +888,9 @@ MENU_ITEMS = {
 
 async def run_menu():
     """타이틀 메뉴: 그리드에서 GO / 1~6 패턴 연습 선택."""
-    font_big   = pygame.font.SysFont(None, 52)
-    font_med   = pygame.font.SysFont(None, 40)
-    font_small = pygame.font.SysFont(None, 26)
+    font_big   = pygame.font.Font(None, 52)
+    font_med   = pygame.font.Font(None, 40)
+    font_small = pygame.font.Font(None, 26)
 
     cur_col, cur_row = 0, 0
 
@@ -968,8 +968,8 @@ async def run_menu():
 # 메인 루프
 # ══════════════════════════════════════════════════
 async def run_stage1(practice_pattern: Optional[int] = None):
-    font_big   = pygame.font.SysFont(None, 44)
-    font_small = pygame.font.SysFont(None, 28)
+    font_big   = pygame.font.Font(None, 44)
+    font_small = pygame.font.Font(None, 28)
 
     player  = Player()
     stage   = Stage1(practice_p=practice_pattern)
