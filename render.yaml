@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: pygame-stage1
+    runtime: static
+    buildCommand: python -m pip install -r requirements.txt && python -m pygbag --build game
+    staticPublishPath: game/build/web
