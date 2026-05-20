@@ -1063,6 +1063,8 @@ async def main():
         await run_stage1(practice_pattern=choice)
 
 
-if __name__ == "__main__":
+if __name__ == "__main__" or sys.platform == "emscripten":
     asyncio.run(main())
+
+
 
