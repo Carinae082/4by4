@@ -17,12 +17,12 @@ pygame.display.set_caption("4×4  Stage 1")
 clock = pygame.time.Clock()
 
 # ── 색상 ──────────────────────────────────────────
-BG      = (8, 8, 8)
-GC      = (55, 55, 55)
-GB      = (82, 82, 82)
-OBS     = (115, 115, 115)
-CHAIN_C = (95, 95, 95)
-TXT     = (125, 125, 125)
+BG      = (18, 28, 46)
+GC      = (118, 138, 170)
+GB      = (178, 198, 230)
+OBS     = (210, 216, 226)
+CHAIN_C = (180, 190, 205)
+TXT     = (238, 244, 252)
 
 P_BLUE  = (78, 108, 220)
 P_GREEN = (76, 196, 110)
@@ -960,7 +960,7 @@ async def run_menu():
             True, (60, 60, 60))
         screen.blit(t3, t3.get_rect(centerx=SCREEN_W // 2, bottom=SCREEN_H - 14))
 
-        pygame.display.flip()
+        pygame.display.update()
         clock.tick(60)
         await asyncio.sleep(0)
 
@@ -1054,7 +1054,7 @@ async def run_stage1(practice_pattern: Optional[int] = None):
             screen.blit(t1, t1.get_rect(center=(SCREEN_W // 2, SCREEN_H // 2 - 26)))
             screen.blit(t2, t2.get_rect(center=(SCREEN_W // 2, SCREEN_H // 2 + 18)))
 
-        pygame.display.flip()
+        pygame.display.update()
         await asyncio.sleep(0)
 
 
@@ -1066,7 +1066,7 @@ async def main():
         hint = pygame.font.Font(None, 32).render("If this appears, Python started.", True, (240, 240, 180))
         screen.blit(title, title.get_rect(center=(SCREEN_W // 2, SCREEN_H // 2 - 28)))
         screen.blit(hint, hint.get_rect(center=(SCREEN_W // 2, SCREEN_H // 2 + 24)))
-        pygame.display.flip()
+        pygame.display.update()
         await asyncio.sleep(1.0)
         await run_stage1(practice_pattern=None)
         return
@@ -1091,7 +1091,7 @@ async def show_startup_error(exc: BaseException):
                     break
             if y > SCREEN_H - 30:
                 break
-        pygame.display.flip()
+        pygame.display.update()
         await asyncio.sleep(0.1)
 
 
@@ -1103,4 +1103,5 @@ async def safe_main():
 
 
 asyncio.run(safe_main())
+
 
