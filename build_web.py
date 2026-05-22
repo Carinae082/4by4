@@ -1,4 +1,5 @@
 import pathlib
+import shutil
 import subprocess
 import sys
 import tarfile
@@ -10,12 +11,24 @@ WEB_DIR = GAME_DIR / "build" / "web"
 
 
 def main() -> None:
+    build_dir = GAME_DIR / "build"
+    if build_dir.exists():
+        shutil.rmtree(build_dir)
+
     subprocess.run(
         [
             sys.executable,
             "-m",
             "pygbag",
             "--build",
+            "--ume_block",
+            "0",
+            "--width",
+            "1280",
+            "--height",
+            "720",
+            "--title",
+            "4x4 Stage 1",
             str(GAME_DIR),
         ],
         check=True,
